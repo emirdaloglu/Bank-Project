@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments
+.venv/
+venv/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Generated outputs
+musteri sikayetleri_tahminli.xlsx
+musteri sikayetleri_tahminli_top3.xlsx
+confusion_matrix_validation.png
+sinif_dagilimi.png
+per_class_f1.png
+wordcloud_overall.png
+wordcloud_*.png
+
+# Data (keep private)
+eski veri/
+musteri sikayetleri.xlsx

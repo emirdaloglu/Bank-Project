@@ -1,0 +1,132 @@
+{
+  "validation_accuracy": 0.6620689655172414,
+  "classification_report": {
+    "ATM": {
+      "precision": 0.5,
+      "recall": 0.7692307692307693,
+      "f1-score": 0.6060606060606061,
+      "support": 13.0
+    },
+    "AlbaFX": {
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.8,
+      "support": 3.0
+    },
+    "Aşırı Güvenlik": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "Bilgilendirme Eksikliği": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Fonksiyon Eksikliği": {
+      "precision": 0.5555555555555556,
+      "recall": 0.5357142857142857,
+      "f1-score": 0.5454545454545454,
+      "support": 28.0
+    },
+    "Genel Memnuniyetsizlik": {
+      "precision": 0.6428571428571429,
+      "recall": 0.6428571428571429,
+      "f1-score": 0.6428571428571429,
+      "support": 28.0
+    },
+    "Kart": {
+      "precision": 0.5384615384615384,
+      "recall": 0.8235294117647058,
+      "f1-score": 0.6511627906976745,
+      "support": 17.0
+    },
+    "Kredi": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Kullanışsız": {
+      "precision": 0.6521739130434783,
+      "recall": 0.7142857142857143,
+      "f1-score": 0.6818181818181818,
+      "support": 42.0
+    },
+    "Kur Marjı": {
+      "precision": 0.7,
+      "recall": 0.875,
+      "f1-score": 0.7777777777777778,
+      "support": 8.0
+    },
+    "Login Problemi": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 2.0
+    },
+    "Para Transferi": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Personel": {
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1-score": 0.6666666666666666,
+      "support": 2.0
+    },
+    "Yavaş": {
+      "precision": 0.8428571428571429,
+      "recall": 0.8309859154929577,
+      "f1-score": 0.8368794326241135,
+      "support": 71.0
+    },
+    "Çalışmıyor - Hata Veriyor": {
+      "precision": 0.725,
+      "recall": 0.58,
+      "f1-score": 0.6444444444444445,
+      "support": 50.0
+    },
+    "Çağrı Merkezi": {
+      "precision": 0.5,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.4,
+      "support": 3.0
+    },
+    "Ücret Alınması": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "İlgisizlik": {
+      "precision": 0.5714285714285714,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.6153846153846154,
+      "support": 6.0
+    },
+    "Şube": {
+      "precision": 0.25,
+      "recall": 0.14285714285714285,
+      "f1-score": 0.18181818181818182,
+      "support": 7.0
+    },
+    "accuracy": 0.6620689655172414,
+    "macro avg": {
+      "precision": 0.49885967706333834,
+      "recall": 0.4428663359054062,
+      "f1-score": 0.4500170729265237,
+      "support": 290.0
+    },
+    "weighted avg": {
+      "precision": 0.6654211538919185,
+      "recall": 0.6620689655172414,
+      "f1-score": 0.655582409271945,
+      "support": 290.0
+    }
+  }
+}
