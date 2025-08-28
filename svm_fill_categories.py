@@ -91,7 +91,10 @@ TURKISH_STOPWORDS = set(
 # Output/plot controls
 GENERATE_DIAGNOSTIC_PLOTS = True
 GENERATE_OVERALL_WORDCLOUD = True
-GENERATE_PER_CLASS_WORDCLOUDS = False
+GENERATE_PER_CLASS_WORDCLOUDS = True
+# WordCloud filtering controls
+WORDCLOUD_MIN_FREQ = 2      # Kelimenin en az kaç kez geçmesi gerekir
+WORDCLOUD_TOP_K = 100       # En sık geçen ilk K kelime
 
 # Vectorization mode: 'tfidf' or 'sbert'
 # Defaulting to 'tfidf' as it performed better on this dataset
@@ -1027,21 +1030,60 @@ def main():
     except Exception as e:
         print(f"Top-3 kolonlarını yerinde ekleme atlandı/başarısız: {e}")
 
-    # WordCloud görselleri (sadece overall varsayılan)
+    # WordCloud görselleri (kategori bazlı, sık kullanılan kelimelerle)
     try:
         if GENERATE_OVERALL_WORDCLOUD:
-            print("WordCloud (overall) oluşturuluyor...")
-            all_text = " ".join((df[yorum_col].astype(str).tolist()))
-            wc = WordCloud(width=1200, height=800, background_color="white").generate(all_text)
-            wc.to_file(os.path.join(base_dir, "wordcloud_overall.png"))
+            # Overall: en sık şikayet edilen 1. kategoriye ait metinlerden üret
+            print("WordCloud (overall = en sık kategori) oluşturuluyor...")
+            from collections import Counter as _Counter
+            import re as _re2
+            labeled_all = df[df[kategori_col].notna()].copy()
+            labeled_all[kategori_col] = labeled_all[kategori_col].astype(str).str.strip()
+            if not labeled_all.empty:
+                top_cat = labeled_all[kategori_col].value_counts().idxmax()
+                texts_top = labeled_all.loc[labeled_all[kategori_col] == top_cat, yorum_col].astype(str).tolist()
+                raw_top = " ".join(texts_top)
+                tokens_top = [
+                    tok for tok in _re2.findall(r"[\wçğıöşüÇĞİÖŞÜ]+", raw_top.lower())
+                    if len(tok) > 2 and tok not in TURKISH_STOPWORDS
+                ]
+                if tokens_top:
+                    freq_top_all = _Counter(tokens_top)
+                    freq_top_all = {w: c for w, c in freq_top_all.items() if c >= WORDCLOUD_MIN_FREQ}
+                    if freq_top_all:
+                        freq_items_all = sorted(freq_top_all.items(), key=lambda x: x[1], reverse=True)[:WORDCLOUD_TOP_K]
+                        wc_overall = WordCloud(width=1200, height=800, background_color="white").generate_from_frequencies(dict(freq_items_all))
+                        wc_overall.to_file(os.path.join(base_dir, "wordcloud_overall.png"))
+            
 
         if GENERATE_PER_CLASS_WORDCLOUDS:
-            top_classes = class_counts.sort_values(ascending=False).head(6).index.tolist()
+            from collections import Counter
+            import re as _re
+            # Sadece etiketli (kategorisi belirli) satırlar üzerinden çalış
+            labeled_only = df[df[kategori_col].notna()].copy()
+            labeled_only[kategori_col] = labeled_only[kategori_col].astype(str).str.strip()
+            # En sık görülen sınıflardan başlayarak kelime bulutu üret
+            top_classes = labeled_only[kategori_col].value_counts().head(12).index.tolist()
             for cls in top_classes:
-                cls_text = " ".join((df[df[kategori_col].astype(str) == str(cls)][yorum_col].astype(str).tolist()))
-                if not cls_text.strip():
+                texts = labeled_only.loc[labeled_only[kategori_col] == cls, yorum_col].astype(str).tolist()
+                raw = " ".join(texts)
+                if not raw.strip():
                     continue
-                wc_cls = WordCloud(width=1200, height=800, background_color="white").generate(cls_text)
+                # Tokenizasyon: harf/digit içerikli parçaları al
+                tokens = [
+                    tok for tok in _re.findall(r"[\wçğıöşüÇĞİÖŞÜ]+", raw.lower())
+                    if len(tok) > 2 and tok not in TURKISH_STOPWORDS
+                ]
+                if not tokens:
+                    continue
+                freq = Counter(tokens)
+                # Minimum frekans filtresi ve top-k seçimi
+                freq = {w: c for w, c in freq.items() if c >= WORDCLOUD_MIN_FREQ}
+                if not freq:
+                    continue
+                freq_items = sorted(freq.items(), key=lambda x: x[1], reverse=True)[:WORDCLOUD_TOP_K]
+                freq_top = dict(freq_items)
+                wc_cls = WordCloud(width=1200, height=800, background_color="white").generate_from_frequencies(freq_top)
                 safe_cls = str(cls).replace("/", "-")
                 wc_cls.to_file(os.path.join(base_dir, f"wordcloud_{safe_cls}.png"))
     except Exception as e:
