@@ -15,8 +15,6 @@ Bu proje, banka müşteri şikayetlerini otomatik olarak kategorilere ayırmak i
 
 ### 🔧 Ana Dosyalar
 
-#### 1. `bankamodel.ipynb`
-**Amaç**: Jupyter notebook formatında interaktif model geliştirme ve analiz
 
 **İçerik**:
 - **Hücre 0**: Gerekli kütüphanelerin import edilmesi
@@ -30,7 +28,7 @@ Bu proje, banka müşteri şikayetlerini otomatik olarak kategorilere ayırmak i
 
 **Kullanım**: Jupyter notebook ortamında hücreleri sırayla çalıştırın
 
-#### 2. `svm_fill_categories.py`
+#### 1. `svm_fill_categories.py`
 **Amaç**: Standalone Python scripti - otomatik kategori doldurma
 
 **Özellikler**:
@@ -45,7 +43,7 @@ Bu proje, banka müşteri şikayetlerini otomatik olarak kategorilere ayırmak i
 
 ### 📊 Veri Dosyaları
 
-#### 3. `musteri sikayetleri.xlsx`
+#### 2. `musteri sikayetleri.xlsx`
 **Amaç**: Girdi verisi - müşteri şikayetleri ve kategorileri
 
 **Sütunlar**:
@@ -53,7 +51,7 @@ Bu proje, banka müşteri şikayetlerini otomatik olarak kategorilere ayırmak i
 - `yorum`: Müşteri şikayet metni
 - `kategori`: Şikayet kategorisi (bazıları boş olabilir)
 
-#### 4. `musteri_sikayetleri_tahminli.xlsx`
+#### 3. `musteri_sikayetleri_tahminli.xlsx`
 **Amaç**: Çıktı verisi — tahmin edilen kategorilerle birlikte
 
 **Ek Sütunlar**:
@@ -62,7 +60,7 @@ Bu proje, banka müşteri şikayetlerini otomatik olarak kategorilere ayırmak i
 
 > Not (Yeni): Script artık Top-2/Top-3 önerilerini de üretir ve ayrı bir dosyaya yazar (aşağıya bakınız).
 
-#### 4b. `musteri_sikayetleri_tahminli_top3.xlsx` (Yeni)
+#### 3b. `musteri_sikayetleri_tahminli_top3.xlsx` (Yeni)
 **Amaç**: İlk tahminle birlikte alternatif 2. ve 3. seçenekleri de içeren çıktı
 
 **Ek Sütunlar**:
@@ -72,31 +70,31 @@ Bu proje, banka müşteri şikayetlerini otomatik olarak kategorilere ayırmak i
 
 ### 📈 Görselleştirme Dosyaları
 
-#### 5. `confusion_matrix_validation.png`
+#### 4. `confusion_matrix_validation.png`
 **Amaç**: Model performansının confusion matrix görselleştirmesi
 **İçerik**: Doğru ve yanlış tahminlerin matris gösterimi
 
-#### 6. `sinif_dagilimi.png`
+#### 5. `sinif_dagilimi.png`
 **Amaç**: Veri setindeki sınıf dağılımının görselleştirmesi
 **İçerik**: Her kategorideki şikayet sayısının bar grafiği
 
-#### 7. `per_class_f1.png`
+#### 6. `per_class_f1.png`
 **Amaç**: Her sınıf için F1 skorlarının görselleştirmesi
 **İçerik**: Kategori bazında model performansının bar grafiği
 
-#### 8. `wordcloud_overall.png`
+#### 7. `wordcloud_overall.png`
 **Amaç**: Tüm şikayetlerdeki kelime bulutunun görselleştirmesi
 **İçerik**: En sık kullanılan kelimelerin görsel temsili
 
 ### 📋 Rapor Dosyaları
 
-#### 9. `model_metrics.json`
+#### 8. `model_metrics.json`
 **Amaç**: Model performans metriklerinin JSON formatında saklanması
 **İçerik**: Accuracy, F1 skorları, sınıflandırma raporu
 
 ### 📂 Eski Veri Klasörü
 
-#### 10. `eski veri/predictions_all_models_nan_only.xlsx`
+#### 9. `eski veri/predictions_all_models_nan_only.xlsx`
 **Amaç**: Önceki model çalıştırmalarından elde edilen tahminler
 **İçerik**: Farklı modellerin NaN satırlar için yaptığı tahminler
 
